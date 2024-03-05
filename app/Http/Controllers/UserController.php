@@ -40,6 +40,8 @@ class UserController extends Controller
         // $user = MUser::findOr(1,['username','nama'],function(){
         //     abort(404);
         // });
+        // $user = MUser::findOrFail(1);
+        // $user = MUser::where('username','manager9')->firstOrFail(1);
         // $user=MUser::firstOrCreate(
         //     [
         //         'username'=> 'manager',
