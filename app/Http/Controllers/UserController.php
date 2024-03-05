@@ -98,24 +98,39 @@ class UserController extends Controller
         // $user->isClean();
         // dd($user->isDirty());
 
+        // $user = MUser::create(
+        //     [
+        //         'username'  =>  'Manager55',
+        //         'nama'      =>  'Manager55',  
+        //         'password'  =>  Hash::make('12345'),
+        //         'level_id'  =>  2
+        //     ]
+        // );
+
+        // $user->username= "Manager12";
+
+        // $user->save();
+        // $user->wasChanged();
+        // $user->wasChanged('username');
+        // $user->wasChanged(['username','level_id']);
+        // $user->wasChanged('nama');
+        // $user->wasChanged(['nama','username']);
+        // dd($user->wasChanged(['nama','username']));
+        $user= MUser::all();
+        return view('user.index', ['data' => $user]);
+    }
+    public function tambah(){
+        return view('user.user_tambah');
+    }
+    public function tambah_simpan(Request $request){
         $user = MUser::create(
             [
-                'username'  =>  'Manager55',
-                'nama'      =>  'Manager55',  
-                'password'  =>  Hash::make('12345'),
-                'level_id'  =>  2
+                'username'  =>  $request->username,
+                'nama'      =>  $request->nama,  
+                'password'  =>  Hash::make('$request->password'),
+                'level_id'  =>  $request->level_id
             ]
         );
-
-        $user->username= "Manager12";
-
-        $user->save();
-        $user->wasChanged();
-        $user->wasChanged('username');
-        $user->wasChanged(['username','level_id']);
-        $user->wasChanged('nama');
-        $user->wasChanged(['nama','username']);
-        dd($user->wasChanged(['nama','username']));
-        return view('user.index', ['data' => $user]);
+        return redirect('/user');
     }
 }
