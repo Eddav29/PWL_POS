@@ -42,6 +42,7 @@ class UserController extends Controller
         // });
         // $user = MUser::findOrFail(1);
         // $user = MUser::where('username','manager9')->firstOrFail(1);
+        $user = MUser::where('level_id',2)->count();
         // $user=MUser::firstOrCreate(
         //     [
         //         'username'=> 'manager',
