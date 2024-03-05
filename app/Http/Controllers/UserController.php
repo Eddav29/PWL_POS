@@ -42,7 +42,7 @@ class UserController extends Controller
         // });
         // $user = MUser::findOrFail(1);
         // $user = MUser::where('username','manager9')->firstOrFail(1);
-        $user = MUser::where('level_id',2)->count();
+        // $user = MUser::where('level_id',2)->count();
         // $user=MUser::firstOrCreate(
         //     [
         //         'username'=> 'manager',
@@ -72,6 +72,50 @@ class UserController extends Controller
         //     ]
         // );
         // $user->save();
+        // $user = MUser::create(
+        //     [
+        //         'username'  =>  'Manager55',
+        //         'nama'      =>  'Manager55',  
+        //         'password'  =>  Hash::make('12345'),
+        //         'level_id'  =>  2
+        //     ]
+        // );
+
+        // $user->username='Manager 66';
+        // $user->isDirty();
+        // $user->isDirty('username');
+        // $user->isDirty('nama');
+        // $user->isDirty(['nama','username']);
+
+        // $user->isClean();
+        // $user->isClean('username');
+        // $user->isClean('nama');
+        // $user->isClean(['nama','username']);
+
+        // $user->save();
+
+        // $user->isDirty();
+        // $user->isClean();
+        // dd($user->isDirty());
+
+        $user = MUser::create(
+            [
+                'username'  =>  'Manager55',
+                'nama'      =>  'Manager55',  
+                'password'  =>  Hash::make('12345'),
+                'level_id'  =>  2
+            ]
+        );
+
+        $user->username= "Manager12";
+
+        $user->save();
+        $user->wasChanged();
+        $user->wasChanged('username');
+        $user->wasChanged(['username','level_id']);
+        $user->wasChanged('nama');
+        $user->wasChanged(['nama','username']);
+        dd($user->wasChanged(['nama','username']));
         return view('user.index', ['data' => $user]);
     }
 }
