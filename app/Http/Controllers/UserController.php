@@ -37,10 +37,38 @@ class UserController extends Controller
         // $user = MUser::where('level_id',1)->first();
         // $user = MUser::firstWhere('level_id',1);
         
-        $user = MUser::findOr(1,['username','nama'],function(){
-            abort(404);
-        });
-
+        // $user = MUser::findOr(1,['username','nama'],function(){
+        //     abort(404);
+        // });
+        // $user=MUser::firstOrCreate(
+        //     [
+        //         'username'=> 'manager',
+        //         'nama'=> 'Manager'
+        //     ]
+        // );
+        // $user=MUser::firstOrCreate(
+        //     [
+        //         'username'=> 'manager22',
+        //         'nama'=> 'Manager dua dua',
+        //         'password'=>Hash::make('12345'),
+        //         'level_id'=>2
+        //     ]
+        // );
+        // $user=MUser::firstOrNew(
+        //     [
+        //         'username'=> 'manager',
+        //         'nama'=> 'Manager'
+        //     ]
+        // );
+        // $user=MUser::firstOrNew(
+        //     [
+        //         'username'=> 'manager33',
+        //         'nama'=> 'Manager Tiga Tiga',
+        //         'password'=>Hash::make('12345'),
+        //         'level_id'=>3
+        //     ]
+        // );
+        // $user->save();
         return view('user.index', ['data' => $user]);
     }
 }
