@@ -24,15 +24,23 @@ class UserController extends Controller
 
         
 
-        $data = [
-                'level_id' => 2,
-                'username' => 'manager_tiga',
-                'nama' => 'Manager 3',
-                'password' => Hash::make('12345')
+        // $data = [
+        //         'level_id' => 2,
+        //         'username' => 'manager_tiga',
+        //         'nama' => 'Manager 3',
+        //         'password' => Hash::make('12345')
                 
-            ];
-        MUSer::create($data);
-        $user = MUser::all();
+        //     ];
+        // MUSer::create($data);
+        // $user = MUser::all();
+        // $user = MUser::find(1);
+        // $user = MUser::where('level_id',1)->first();
+        // $user = MUser::firstWhere('level_id',1);
+        
+        $user = MUser::findOr(1,['username','nama'],function(){
+            abort(404);
+        });
+
         return view('user.index', ['data' => $user]);
     }
 }
