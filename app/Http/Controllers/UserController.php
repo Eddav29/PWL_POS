@@ -116,8 +116,11 @@ class UserController extends Controller
         // $user->wasChanged('nama');
         // $user->wasChanged(['nama','username']);
         // dd($user->wasChanged(['nama','username']));
-        $user= MUser::all();
+        // $user= MUser::all();
+        // return view('user.index', ['data' => $user]);
+        $user = MUser::with('level')->get();
         return view('user.index', ['data' => $user]);
+
     }
     public function tambah(){
         return view('user.user_tambah');
