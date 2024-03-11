@@ -133,4 +133,27 @@ class UserController extends Controller
         );
         return redirect('/user');
     }
+
+    public function ubah($id){
+        $user = MUser::find($id);
+        return view('user.user_ubah',['data'=>$user]);
+    }
+
+    public function ubah_simpan($id, Request $request){
+        $user = MUser::find($id);
+        
+        $user->username = $request->username;
+        $user->nama = $request->nama;
+        $user->level_id = $request->level_id;
+
+        $user->save();
+        return redirect('/user');
+    }
+
+    public function hapus($id) {
+        $user =  MUser::find($id);
+        $user->delete();
+        
+        return redirect('/user');
+    }
 }

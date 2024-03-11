@@ -4,7 +4,7 @@
     <title>Data User</title>
 </head>
 <body>
-    <h1>Data Level Pengguna</h1>
+    <h1>Data Pengguna</h1>
     <a href="{{ route('/user/tambah') }}">+ Tambah User</a>
     <table border="1" cellpadding="2" cellspacing="0">
         <tr>
