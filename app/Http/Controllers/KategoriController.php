@@ -51,7 +51,18 @@ class KategoriController extends Controller
         $kategori->update($request->all());
 
         // Redirect ke halaman yang sesuai setelah berhasil melakukan update
-        return redirect()->route('/kategori')->with('success', 'Data kategori berhasil diperbarui.');
+        return redirect()->route('/kategori/index')->with('success', 'Data kategori berhasil diperbarui.');
+    }
+    public function hapus($id)
+    {
+        // Temukan data kategori berdasarkan ID
+        $kategori = MKategori::findOrFail($id);
+
+        // Hapus data kategori
+        $kategori->delete();
+
+        // Redirect kembali ke halaman yang sesuai setelah berhasil menghapus
+        return redirect('/kategori')->with('success', 'Data kategori berhasil dihapus.');
     }
 }
 

@@ -20,7 +20,7 @@ Route::get('/', function () {
 });
 Route::get('/user', [UserController::class, 'index']);
 Route::get('/level', [LevelController::class, 'index']);
-Route::get('/kategori', [KategoriController::class, 'index']);
+Route::get('/kategori', [KategoriController::class, 'index'])->name('/kategori/index');
 Route::get('/user/tambah', [UserController::class, 'tambah'])->name('/user/tambah');
 Route::post('/user/tambah_simpan', [UserController::class, 'tambah_simpan'])->name('/user/tambah_simpan');
 Route::get('/user/ubah/{id}', [UserController::class, 'ubah'])->name('/user/ubah');
@@ -37,6 +37,6 @@ Route::get('kategori/edit/{id}', [KategoriController::class, 'edit'])->name('kat
 // Route untuk mengupdate data (gunakan metode PUT atau PATCH)
 Route::put('/kategori/update/{id}', [KategoriController::class, 'update'])->name('kategori.update');    
 
-// Route untuk menghapus data
-Route::delete('kategori/{id}', [KategoriController::class, 'destroy'])->name('kategori.destroy');
+Route::delete('kategori/hapus/{id}', [KategoriController::class, 'hapus'])->name('kategori.hapus');
+
 

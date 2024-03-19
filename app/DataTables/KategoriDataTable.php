@@ -25,8 +25,12 @@ class KategoriDataTable extends DataTable
             ->addColumn('action', function ($row) {
                 return '
                 <a href="kategori/edit/' . $row->kategori_id . '" class="btn btn-sm btn-primary"><i class="fas fa-edit"></i></a>
-                <a href="kategori/destroy/' . $row->kategori_id . '" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></a>
-                ';
+                <form action="' . route('kategori.hapus', $row->kategori_id) . '" method="POST" onsubmit="return confirm(\'Apakah Anda yakin ingin menghapus data ini?\')">
+                ' . csrf_field() . '
+                ' . method_field('DELETE') . '
+                <button type="submit" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></button>
+            </form>
+            ';
             })
             ->setRowId('id');
     }
