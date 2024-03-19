@@ -45,11 +45,6 @@
 {{-- Add common Javascript/Jquery code --}}
 @push('js')
     <script src="https://cdn.datatables.net/2.0.2/js/dataTables.js"></script>
-    <script>
-        $(document).on('click', '.edit', function() {
-            console.log('edit', $(this).data('id'));
-        });
-    </script>
 @endpush
 
 @stack('scripts')
@@ -60,12 +55,12 @@
     <style type="text/css">
         {{-- You can add AdminLTE customizations here --}}
         /*
-                                                .card-header {
-                                                border-bottom: none;
-                                                }
-                                                .card-title {
+        .card-header {
+        border-bottom: none;
+        }
+        .card-title {
                                                 font-weight: 600;
                                                 }
-                                                */
+                                                */                                        
     </style>
 @endpush

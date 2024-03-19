@@ -6,29 +6,52 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 use App\DataTables\KategoriDataTable;
-
+use App\Models\MKategori;
 class KategoriController extends Controller
 {
-    // public function index() {
-    //     // $data = [
-    //     //     'kategori_kode' => 'SNK',
-    //     //     'kategori_nama' => 'Snack/Makanan Ringan',
-    //     //     'created_at' => now()
-    //     // ];
-    //     // DB::table('m_kategori')->insert($data);
-    //     // return 'Insert data baru berhasil';
-
-    //     // $row = DB::table('m_kategori')->where('kategori_kode', 'SNK')->update(['kategori_nama' => 'Camilan']);
-    //     // return 'Update data berhasil. Jumlah data yang diupdate: ' . $row . ' baris';
-
-    //     // $row = DB::table('m_kategori')->where('kategori_kode', 'SNK')->delete();
-    //     // return 'Delete data berhasil. Jumlah data yang dihapus: ' . $row . ' baris';
-
-    //     $data = DB::table('m_kategoris')->get();
-    //     return view('kategori.index', ['data' => $data]);
-    // }
-
     public function index(KategoriDataTable $dataTable) {
         return $dataTable->render('kategori.index');
     }
+
+    public function create(){
+        return view('kategori.create');
+    }
+
+    public function store(Request $request){
+
+        MKategori::create ( [
+            'kategori_kode' => $request->kodeKategori,
+            'kategori_nama' => $request->namaKategori,
+        ]);
+        return redirect('/kategori');
+    }
+    // Metode untuk menampilkan halaman edit
+    public function edit($id)
+    {
+        // Ambil data kategori berdasarkan ID
+        $kategori = MKategori::findOrFail($id);
+
+        // Tampilkan halaman edit dengan data kategori yang dipilih
+        return view('kategori.edit', compact('kategori'));
+    }
+
+    // Metode untuk menyimpan perubahan data setelah proses edit
+    public function update(Request $request, $id)
+    {
+        // Validasi data yang dikirimkan
+        $request->validate([
+            'kategori_kode' => 'required',
+            'kategori_nama' => 'required',
+        ]);
+
+        // Temukan data kategori berdasarkan ID
+        $kategori = MKategori::findOrFail($id);
+
+        // Update data kategori dengan data yang dikirimkan dari formulir edit
+        $kategori->update($request->all());
+
+        // Redirect ke halaman yang sesuai setelah berhasil melakukan update
+        return redirect()->route('/kategori')->with('success', 'Data kategori berhasil diperbarui.');
+    }
 }
+
