@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LevelController;
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\POSController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -40,3 +41,7 @@ Route::put('/kategori/update/{id}', [KategoriController::class, 'update'])->name
 Route::delete('kategori/hapus/{id}', [KategoriController::class, 'hapus'])->name('kategori.hapus');
 
 
+Route::get('/level/create', [LevelController::class, 'create'])->name('level.create');
+Route::post('/level', [LevelController::class, 'store'])->name('level.store');
+
+Route::resource('m_user',POSController::class);

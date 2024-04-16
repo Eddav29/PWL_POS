@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Http\RedirectResponse;
 
 use App\DataTables\KategoriDataTable;
 use App\Models\MKategori;
@@ -17,12 +18,25 @@ class KategoriController extends Controller
         return view('kategori.create');
     }
 
-    public function store(Request $request){
+    public function store(Request $request): RedirectResponse{
+
+        $request->validate([
+            'kategori_kode' => ['required', 'min:5'],
+            'kategori_nama' => 'required',
+        ]);
 
         MKategori::create ( [
             'kategori_kode' => $request->kodeKategori,
             'kategori_nama' => $request->namaKategori,
         ]);
+
+        $validated = $request->validated();
+
+        $validated = $request->safe()->only(['kategori_kode', 'kategori_nama']);
+        $validated = $request->safe()->except(['kategori_kode', 'kategori_nama']);
+
+        MKategori::create($validated);
+
         return redirect('/kategori');
     }
     // Metode untuk menampilkan halaman edit
