@@ -1,40 +1,52 @@
-@extends('layouts.app')
-
-{{-- Menyesuaikan bagian layout --}}
-
-@section('subtitle', 'Kategori')
-@section('content_header_title', 'Kategori')
-@section('content_header_subtitle', 'Edit')
-
-{{-- Konten utama: konten halaman utama --}}
-
+@extends('layouts.template')
 @section('content')
-    <div class="container">
-        <div class="card card-primary">
-            <div class="card-header">
-                <h3 class="card-title">Edit Kategori</h3>
-            </div>
-
-            <form action="{{ route('kategori.update', $kategori->kategori_id) }}" method="post">
-                @csrf
-                @method('PUT')
-                <div class="card-body">
-                    <div class="form-group">
-                        <label for="kodeKategori">Kode Kategori</label>
-                        <input type="text" name="kategori_kode" class="form-control" id="kodeKategori"
-                            placeholder="Masukkan Kode" value="{{ $kategori->kategori_kode }}">
-                    </div>
-                    <div class="form-group">
-                        <label for="namaKategori">Nama Kategori</label>
-                        <input type="text" class="form-control" name="kategori_nama" id="namaKategori"
-                            placeholder="Masukkan Nama" value="{{ $kategori->kategori_nama }}">
-                    </div>
-                </div>
-
-                <div class="card-footer">
-                    <button type="submit" class="btn btn-primary">Submit</button>
-                </div>
-            </form>
+    <div class="card card-outline card-primary">
+        <div class="card-header">
+            <h3 class="card-title">{{ $page->title }}</h3>
+            <div class="card-tools"></div>
         </div>
-    </div>
+        <div class="card-body">
+            @empty($kategori)
+                <div class="alert alert-danger alert-dismissible">
+                    <h5><i class="icon fas fa-ban"></i> Kesalahan!</h5>
+                    Data yang Anda cari tidak ditemukan.
+                </div>
+                <a href="{{ url('kategori') }}" class="btn btn-sm btn-default mt-2">Kembali</a>
+            @else
+                <form method="POST" action="{{ url('/kategori/'.$kategori->user_id) }}" class="form-horizontal">
+                    @csrf
+                    {!! method_field('PUT') !!} <!-- tambahkan baris ini untuk proses edit yang butuh method PUT -->
+                    <div class="form-group row">
+                        <label class="col-1 control-label col-form-label">Kode</label>
+                        <div class="col-11">
+                            <input type="text" class="form-control" id="kategori_kode" name="kategori_kode" value="{{ old('kategori_kode', $kategori->kategori_kode) }}" required>
+                            @error('username')
+                                <small class="form-text text-danger">{{ $message }}</small>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-1 control-label col-form-label">Nama</label>
+                        <div class="col-11">
+                            <input type="text" class="form-control" id="kategori_nama" name="kategori_nama" value="{{ old('kategori_nama', $kategori->kategori_nama) }}" required>
+                            @error('nama')
+                                <small class="form-text text-danger">{{ $message }}</small>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-1 control-label col-form-label"></label>
+                        <div class="col-11">
+                            <button type="submit" class="btn btn-primary btn-sm">Simpan</button>
+                            <a class="btn btn-sm btn-default ml-1" href="{{ url('kategori') }}">Kembali</a>
+                        </div>
+                    </div>
+                </form>
+                @endempty
+            </div>
+        </div>
 @endsection
+@push('css')
+@endpush
+@push('js')
+@endpush
