@@ -10,8 +10,9 @@ class MLevel extends Model
 {
     use HasFactory;
     protected $table ='m_levels';
-    protected $primaryKey = 'id_level';
+    protected $primaryKey = 'level_id';
 
+    protected $fillable = ['level_kode','level_nama'];
     public function users(): HasMany{
         return $this->hasMany(MUser::class);
     }
