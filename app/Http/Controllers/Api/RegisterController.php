@@ -20,7 +20,7 @@ class RegisterController extends Controller
         ]);
         //if validation fails
         if ($validator->fails()) {
-            return response()->json($validator->errors(), 422);
+            return response()->json($vadator->errors(), 422);
         }
         //create user
         $user = MUser::create([
