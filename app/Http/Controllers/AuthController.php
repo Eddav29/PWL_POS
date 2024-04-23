@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\m_user;
+use App\Models\MUser;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -64,7 +64,7 @@ class AuthController extends Controller
 
         $validator = Validator::make($request->all(), [
             'nama' => 'required',
-            'username' => 'required | unique:useri,username',
+            'username' => 'required | unique:m_users,username',
             'password' => 'required',
         ]);
 
@@ -75,7 +75,7 @@ class AuthController extends Controller
         $request['level_id'] = '2';
         $request['password'] = Hash::make($request->password);
 
-        m_user::create($request->all());
+        MUser::create($request->all());
 
         return redirect()->route('login');
     }
