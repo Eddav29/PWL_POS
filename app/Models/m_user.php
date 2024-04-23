@@ -3,8 +3,8 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-
-class m_user extends Model
+use Illuminate\Foundation\Auth\User as Authentication;
+class m_user extends Authentication 
 {
     protected $table = 'useri';
     protected $primaryKey = 'user_id';
@@ -15,4 +15,5 @@ class m_user extends Model
     public function level() {
         return $this->belongsTo(MLevel::class, 'level_id', 'level_id');
     }
+    
 }
