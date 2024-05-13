@@ -16,18 +16,21 @@ class RegisterController extends Controller
             'username' =>'required',
             'nama' =>'required',
             'password' => 'required|min:5|confirmed',
-            'level_id' =>'required'
+            'level_id' =>'required',
+            'image' => 'required|image|mimes:jpeg,png,gig,svg|max:2048'
         ]);
         //if validation fails
         if ($validator->fails()) {
             return response()->json($vadator->errors(), 422);
         }
+        $image = $request->image;
         //create user
         $user = MUser::create([
             'username' => $request->username,
             'nama' => $request->nama,
             'password' =>bcrypt($request->password),
-            'level_id' => $request->level_id
+            'level_id' => $request->level_id,
+            'image' => $image ->hashName()
         ]);
 
         //return response JSON user is created

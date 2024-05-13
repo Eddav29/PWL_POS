@@ -16,8 +16,9 @@ class DatabaseSeeder extends Seeder
         $this->call(BarangSeeder::class);
         $this->call(LevelSeeder::class);
         $this->call(UserSeeder::class);
-        $this->call(PenjualanSeeder::class);
         $this->call(StokSeeder::class);
+        $this->call(PenjualanSeeder::class);
+        
         $this->call(PenjualanDetailSeeder::class);
     }
 }
